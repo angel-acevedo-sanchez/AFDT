@@ -22,15 +22,39 @@ int main(void){
 	FILE *fp = NULL;
 	struct Transicion *transiciones = NULL;
 	int longitud=0, i=0, j=0, t=0, resul=1;
+	char seleccion;
+
 	
-	if((fp=fopen("a.txt", "r"))==NULL){
-		printf("Error al abrir el fichero\n");
+	printf("\nA continuacion se muestran los ficheros existentes: \n\n");
+
+	printf("		Fichero a:  L = {a b^n a : n>=0}\n");
+	printf("			    T(M) = {c^(n+3) : n>=1}\n\n");
+	printf("		Fichero b:  L = {a^n b (ca)^2k w : n,k >=0, w pertenece {a,b}^*}\n");
+	printf("			    T(M) = {1 0^(k+1) 1^m : k>=0, m = |w|}\n\n");
+	printf("		Fichero c:  L = {w pertenece a {a,b}^* : w no termina en b}\n");
+	printf("                            T(M) = {x pertenece a {0,1}^* : el valor en binario de x es par}\n\n");
+
+	printf("\nEscriba 'a', 'b' o 'c', en minuscula y sin comillas para probar el automata correspondiente: ");
+
+	scanf("%c", &seleccion);
+
+	char path[6];
+
+	if(seleccion == 'a' || seleccion == 'b' || seleccion == 'c'){
+		path[0] = seleccion;
+		path[1] = '.'; path[2]= 't'; path[3] ='x'; path[4] = 't';
+	}
+
+
+	if((fp=fopen(path, "r"))==NULL){
+		printf("El fichero no existe o se ha producido un error\n");
 		exit(-1);
 	}
 	
+	
 
 	fscanf(fp, "Longitud del alfabeto: %i\n", &longitud);
-	//aaprintf("%i\n", longitud);
+
 
 	alfabeto = (char*)malloc(longitud*sizeof(char));
 
@@ -69,12 +93,15 @@ int main(void){
 		t++;
 	}
 
-	char c;
+	char c = ' ';
 	int estado_actual = 0;
 	bool en_alfabeto = true, hay_transicion = true;
-	char traduccion[50];
+	char traduccion[50] = "";
 	j = 0;
 
+	fflush(stdin);
+
+	printf("\nIntroduzca la secuencia de caracteres: ");
 
 	while((c = getchar()) != '\n' && en_alfabeto && hay_transicion){
 
@@ -118,6 +145,9 @@ int main(void){
 	fclose(fp);
 	free(final);
 	free(transiciones);
+
+	printf("\n");
+	system("pause");
 	
 	return 0;
 }

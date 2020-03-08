@@ -1,18 +1,14 @@
 Longitud del alfabeto: 2
 Letras del alfabeto: a b
-Numero de estados: 5
-Numero de estados finales: 2
-Estados finales: 3 4
+Numero de estados: 3
+Numero de estados finales: 1
+Estados finales: 2
 
 	a
-0	1 *		
-1	4 *			
-2	3 *				
-3	-1 *		
-4	-1 *		 
+0	1 cccc		
+1	2 *			
+2	-1 *						 
 	b
 0	-1 *
-1	2 cccc
-2	2 c
-3	-1 *
-4	-1 *
+1	1 c
+2	-1

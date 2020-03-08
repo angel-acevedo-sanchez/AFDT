@@ -1,0 +1,12 @@
+Longitud del alfabeto: 2
+Letras del alfabeto: a b
+Numero de estados: 2
+Numero de estados finales: 1
+Estados finales: 0
+
+	a
+0	0 0	
+1	0 0									 
+	b
+0	1 1
+1	1 1
