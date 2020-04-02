@@ -8,7 +8,7 @@ struct Transicion {
 	int estado_inicial;
 	int estado_final;
 	char traduccion[20];
-	char letra; //esta es la letra del alfabeto con la que se transita de un estado a otro
+	char letra; 
 
 };
 
@@ -63,12 +63,11 @@ int main(void){
 		fscanf(fp, "%c ", &alfabeto[i]);
 
 	fscanf(fp, "Numero de estados: %i\n", &num_estados);
-//	printf("%i\n", num_estados);
 	fscanf(fp, "Numero de estados finales: %i\n", &finales);
-//	printf("%i\n", finales);
 
 
-	final = (int*)malloc(finales*sizeof(int)); //array para los estados finales
+
+	final = (int*)malloc(finales*sizeof(int)); 
 	fscanf(fp, "Estados finales: ");
 
 	for(i=0; i<finales; i++)
@@ -76,7 +75,7 @@ int main(void){
 	
 	transiciones =(struct Transicion *)malloc((num_estados*longitud)*sizeof(struct Transicion));
 
-	char letra = ' '; //para recuperar del fichero la letra del alfabeto correspondiente una parte de la tabla
+	char letra = ' '; 
 	i = 0;
 
 	while ((t < num_estados*longitud + longitud) && (i < num_estados *longitud) && resul != 0){ 
@@ -84,10 +83,10 @@ int main(void){
 		if(t > 0){ //leo una fila real de la tabla de transiciones --> paso al sguiente struct
 			resul = leerAutomata(fp, &transiciones[i], &t, num_estados, &letra);
 			transiciones[i].letra = letra;
-			//printf("Numero de orden: %i\n", i);
-				if(t>0) i++; //t se modifica en la llamada, por eso se tiene que comprobar otra vez el valor para a
-								// para avanzar en el array de structs, (array de transiciones)
-		}else if(t==0)
+	
+				if(t>0) i++; 
+						
+		}else if(t==0) //leo el encabezado de la tabla
 			resul = leerAutomata(fp, &transiciones[i], &t, num_estados, &letra);
 
 		t++;
@@ -163,11 +162,8 @@ int leerAutomata(FILE *f, struct Transicion *t, int* time, int estados, char* l)
 		else return 0;
 	}
 	else{
-		if((fscanf(f, "%i\t%i %s", &t->estado_inicial, &t->estado_final, &t->traduccion))!=EOF){
-			
-			//printf("%i --> %i, %s\n", t->estado_inicial, t->estado_final, t->traduccion);
+		if((fscanf(f, "%i\t%i %s", &t->estado_inicial, &t->estado_final, &t->traduccion))!=EOF)
 			return 1;
-		}
 		else return 0;
 	}
 }
